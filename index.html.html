@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design and Management of Water Systems for New Samta City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-deep: #085041;
+    --teal-mid:  #1D9E75;
+    --teal-light: #5DCAA5;
+    --blue-mid:  #185FA5;
+    --blue-light: #E6F1FB;
+    --surface:   #ffffff;
+    --surface-2: #f5f7f6;
+    --text-1:    #111210;
+    --text-2:    #5a6360;
+    --border:    rgba(0,0,0,0.08);
+    --radius:    16px;
+  }
+
+  html { height: 100%; }
+
+  body {
+    min-height: 100%;
+    background: var(--teal-deep);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 10% 0%, rgba(29,158,117,0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(24,95,165,0.35) 0%, transparent 60%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 18px 48px;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* subtle water-wave decoration */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-radius: 26px;
+    width: 100%;
+    max-width: 390px;
+    overflow: hidden;
+    box-shadow:
+      0 2px 0 rgba(255,255,255,0.12) inset,
+      0 32px 80px rgba(4,52,44,0.45),
+      0 4px 16px rgba(0,0,0,0.12);
+    animation: rise 0.6s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* header band */
+  .card-header {
+    background: var(--teal-deep);
+    background-image: radial-gradient(ellipse 100% 140% at 50% 120%, rgba(29,158,117,0.6) 0%, transparent 70%);
+    padding: 28px 24px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    background: rgba(93,202,165,0.15);
+    border: 1px solid rgba(93,202,165,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-bottom: 14px;
+  }
+
+  .icon-wrap {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+  }
+
+  .card-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .card-header p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  /* divider with wave */
+  .wave-divider {
+    display: block;
+    width: 100%;
+    height: 28px;
+    background: var(--teal-deep);
+    background-image: radial-gradient(ellipse 100% 140% at 50% 120%, rgba(29,158,117,0.6) 0%, transparent 70%);
+  }
+  .wave-divider svg { display: block; }
+
+  /* body */
+  .card-body {
+    padding: 20px 20px 26px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 10px;
+  }
+
+  /* link buttons */
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-1);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    transition: background 0.15s, transform 0.12s, box-shadow 0.15s;
+    cursor: pointer;
+  }
+  .link-btn:hover {
+    background: #edf7f3;
+    border-color: rgba(29,158,117,0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(15,110,86,0.10);
+  }
+  .link-btn:active { transform: scale(0.98); }
+
+  .link-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .link-icon.report  { background: #E1F5EE; }
+  .link-icon.li      { background: var(--blue-light); font-weight: 800; font-size: 13px; font-family: 'Syne', sans-serif; color: var(--blue-mid); }
+
+  .link-text { flex: 1; min-width: 0; }
+  .link-main { display: block; font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .link-sub  { display: block; font-size: 11px; color: var(--text-2); margin-top: 1px; }
+
+  .link-arrow {
+    font-size: 16px;
+    color: #c5ccc9;
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .link-btn:hover .link-arrow { transform: translateX(2px); color: var(--teal-mid); }
+
+  /* separator */
+  .sep {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 18px 0 16px;
+  }
+
+  /* team chips */
+  .chips-label { margin-bottom: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 11px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+  }
+
+  /* footer */
+  .card-footer {
+    padding: 0 20px 22px;
+    text-align: center;
+    font-size: 11px;
+    color: #b0bcb8;
+    line-height: 1.6;
+  }
+  .card-footer strong { color: var(--text-2); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="card" role="main">
+
+  <div class="card-header">
+    <div class="badge">Graduation Project · 2026</div>
+    <div class="icon-wrap">💧</div>
+    <h1>Design and Management of Water Systems for New Samta City</h1>
+    <p>Civil Engineering · Water Systems &amp; Infrastructure · IMSIU</p>
+  </div>
+
+  <!-- wave transition -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 390 28" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="390" height="28">
+      <path d="M0,0 C80,28 150,4 220,18 C290,32 340,6 390,0 L390,28 L0,28 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <div class="card-body">
+
+    <p class="section-label">Project Report</p>
+
+    <a class="link-btn" href="https://drive.google.com/file/d/15PncnIwFL8xf8fQ6jx0PDHoyfFMSPb31/view?usp=sharing" target="_blank" rel="noopener">
+      <span class="link-icon report">📄</span>
+      <span class="link-text">
+        <span class="link-main">View Full Report</span>
+        <span class="link-sub">PDF · Google Drive</span>
+      </span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <hr class="sep">
+    <p class="section-label">Meet the Team</p>
+
+    <a class="link-btn" href="https://www.linkedin.com/in/rashed-aldaham-capm%C2%AE-684259391" target="_blank" rel="noopener">
+      <span class="link-icon li">in</span>
+      <span class="link-text">
+        <span class="link-main">Rashed Aldaham</span>
+        <span class="link-sub">LinkedIn · CAPM®</span>
+      </span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a class="link-btn" href="https://www.linkedin.com/in/saud-alhumaidi/" target="_blank" rel="noopener">
+      <span class="link-icon li">in</span>
+      <span class="link-text">
+        <span class="link-main">Saud Alhumaidi</span>
+        <span class="link-sub">LinkedIn Profile</span>
+      </span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a class="link-btn" href="https://www.linkedin.com/in/abdulmalik-albedah-ce/" target="_blank" rel="noopener">
+      <span class="link-icon li">in</span>
+      <span class="link-text">
+        <span class="link-main">Abdulmalik Albedah</span>
+        <span class="link-sub">LinkedIn Profile</span>
+      </span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <div class="chips" style="margin-top: 14px;">
+      <span class="chip">Rashed Aldaham</span>
+      <span class="chip">Saud Alhumaidi</span>
+      <span class="chip">Abdulmalik Albedah</span>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <strong>Imam Mohammad Ibn Saud Islamic University</strong><br>
+    College of Engineering · CE Class of 2026
+  </div>
+
+</div>
+
+</body>
+</html>
